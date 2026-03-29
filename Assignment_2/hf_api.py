@@ -1,7 +1,7 @@
 import requests
 from util.api_loader import get_api_key
 
-API_URL = "https://api-inference.huggingface.co/models/distilgpt2"
+API_URL = "https://router.huggingface.co/models/distilgpt2"
 
 def main():
     try:
