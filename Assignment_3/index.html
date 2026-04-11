@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NexusChat — AI Assistant</title>
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- Mobile Overlay -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <div class="app-container">
+
+    <!-- ========== SIDEBAR ========== -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-logo">
+          <span class="logo-mark">N</span>
+          <span class="logo-text">NexusChat</span>
+        </div>
+        <button class="sidebar-close-btn" id="sidebarCloseBtn" title="Close sidebar">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <button class="new-chat-btn" id="newChatBtn">
+        <i class="fa-solid fa-plus"></i>
+        <span>New Chat</span>
+      </button>
+
+      <div class="chat-history-section">
+        <p class="history-label">Recent</p>
+        <ul class="chat-history-list" id="chatHistoryList">
+          <li class="history-item active">
+            <i class="fa-regular fa-message"></i>
+            <span>Current conversation</span>
+          </li>
+          <li class="history-item">
+            <i class="fa-regular fa-message"></i>
+            <span>What is machine learning?</span>
+          </li>
+          <li class="history-item">
+            <i class="fa-regular fa-message"></i>
+            <span>Python code review</span>
+          </li>
+          <li class="history-item">
+            <i class="fa-regular fa-message"></i>
+            <span>Essay on climate change</span>
+          </li>
+          <li class="history-item">
+            <i class="fa-regular fa-message"></i>
+            <span>Resume writing tips</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="sidebar-footer">
+        <button class="theme-toggle-btn" id="themeToggleBtn" title="Toggle dark/light mode">
+          <i class="fa-solid fa-moon" id="themeIcon"></i>
+          <span id="themeLabel">Dark Mode</span>
+        </button>
+        <div class="user-profile">
+          <div class="user-avatar">
+            <i class="fa-solid fa-user"></i>
+          </div>
+          <div class="user-info">
+            <span class="user-name">You</span>
+            <span class="user-email">user@example.com</span>
+          </div>
+          <button class="user-settings-btn" title="Settings">
+            <i class="fa-solid fa-ellipsis"></i>
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ========== MAIN CONTENT ========== -->
+    <main class="main-content">
+
+      <!-- Top Bar -->
+      <header class="top-bar">
+        <button class="hamburger-btn" id="hamburgerBtn" title="Open sidebar">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+        <div class="top-bar-title">
+          <span class="model-badge">
+            <i class="fa-solid fa-bolt"></i>
+            Nexus Pro
+          </span>
+        </div>
+        <div class="top-bar-actions">
+          <button class="top-action-btn" title="Export chat" id="exportChatBtn">
+            <i class="fa-solid fa-download"></i>
+          </button>
+        </div>
+      </header>
+
+      <!-- Messages Area -->
+      <section class="messages-wrapper" id="messagesWrapper">
+        <div class="messages-container" id="messagesContainer">
+
+          <!-- Welcome Screen -->
+          <div class="welcome-screen" id="welcomeScreen">
+            <div class="welcome-inner">
+              <div class="welcome-logo">
+                <div class="welcome-icon-ring">
+                  <i class="fa-solid fa-wand-magic-sparkles"></i>
+                </div>
+              </div>
+              <h1 class="welcome-title">What can I help with?</h1>
+              <p class="welcome-subtitle">Ask me anything — I'm ready to assist, explain, create, or brainstorm.</p>
+
+              <div class="suggestion-grid" id="suggestionGrid">
+                <button class="suggestion-card" data-prompt="Explain how neural networks work in simple terms">
+                  <div class="card-icon"><i class="fa-solid fa-brain"></i></div>
+                  <div class="card-body-content">
+                    <h6>Explain concepts</h6>
+                    <p>Break down complex topics in simple, clear language</p>
+                  </div>
+                </button>
+                <button class="suggestion-card" data-prompt="Write a Python function to sort a list of dictionaries by a specific key">
+                  <div class="card-icon"><i class="fa-solid fa-code"></i></div>
+                  <div class="card-body-content">
+                    <h6>Write code</h6>
+                    <p>Get help writing, reviewing, or debugging code</p>
+                  </div>
+                </button>
+                <button class="suggestion-card" data-prompt="Help me brainstorm creative names for a tech startup that builds AI tools">
+                  <div class="card-icon"><i class="fa-solid fa-lightbulb"></i></div>
+                  <div class="card-body-content">
+                    <h6>Brainstorm ideas</h6>
+                    <p>Generate creative ideas for projects, names, content</p>
+                  </div>
+                </button>
+                <button class="suggestion-card" data-prompt="Summarize the key points about how the internet works">
+                  <div class="card-icon"><i class="fa-solid fa-file-lines"></i></div>
+                  <div class="card-body-content">
+                    <h6>Summarize topics</h6>
+                    <p>Get clear summaries of articles, topics, or documents</p>
+                  </div>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Typing Indicator (hidden initially) -->
+          <div class="typing-indicator-wrapper" id="typingIndicator" style="display:none;">
+            <div class="message ai-message typing-msg">
+              <div class="message-avatar ai-avatar">
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+              </div>
+              <div class="message-bubble">
+                <div class="typing-dots">
+                  <span></span><span></span><span></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Input Area -->
+      <div class="input-area">
+        <div class="input-container" id="inputContainer">
+          <button class="attach-btn" title="Attach file">
+            <i class="fa-solid fa-paperclip"></i>
+          </button>
+          <textarea
+            id="messageInput"
+            class="message-input"
+            placeholder="Message NexusChat…"
+            rows="1"
+            maxlength="4000"
+          ></textarea>
+          <button class="send-btn" id="sendBtn" disabled title="Send message">
+            <i class="fa-solid fa-paper-plane"></i>
+          </button>
+        </div>
+        <p class="input-footer">NexusChat can make mistakes. Consider checking important information.</p>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/chat.js"></script>
+</body>
+</html>
